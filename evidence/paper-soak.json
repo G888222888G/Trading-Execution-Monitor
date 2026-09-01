@@ -1,0 +1,17 @@
+{
+  "candle_end": "2026-08-29T01:55:00Z",
+  "candle_start": "2026-08-29T00:00:00Z",
+  "candles_processed": 24,
+  "data_file": "btc-usd-2026-08-29.csv",
+  "data_sha256": "1178d0d6576e6a974e13801a995e89c7ffc02da242fd2d0264cbc67d013d49b4",
+  "generated_at": "2026-09-01T14:41:55.213+00:00",
+  "limitations": [
+    "The strategy is a deterministic exercise fixture, not a trading recommendation.",
+    "Orders are filled by the local paper venue at recorded candle closes.",
+    "No credentials, account data, or funded execution are used."
+  ],
+  "mode": "paper",
+  "orders_completed": 4,
+  "overall_result": "passed",
+  "records_match": true
+}

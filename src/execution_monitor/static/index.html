@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Trading Execution Monitor</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body data-status="connecting">
+    <main class="shell" aria-labelledby="page-title">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <h1 id="page-title">Trading Execution Monitor</h1>
+            <p>Read-only reliability view</p>
+          </div>
+        </div>
+        <div class="topbar-status" aria-label="Monitor connection status">
+          <span class="badge badge-mode" id="mode-value">CONNECTING</span>
+          <span class="badge badge-connection" id="connection-value">
+            <span class="badge-dot" aria-hidden="true"></span>
+            <span id="connection-copy">CONNECTING</span>
+          </span>
+        </div>
+      </header>
+
+      <section class="status-hero card" aria-labelledby="status-title">
+        <div class="status-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 54" role="presentation">
+            <path d="M24 2 44 10v15c0 13-8.2 23-20 27C12.2 48 4 38 4 25V10L24 2Z"></path>
+            <path class="status-check" d="m14 26 6 6 14-15"></path>
+          </svg>
+        </div>
+        <div class="status-copy">
+          <p class="section-kicker">SYSTEM STATUS</p>
+          <h2 id="status-title">Connecting to the monitor</h2>
+          <p id="status-summary">Waiting for verified execution state.</p>
+          <p id="status-detail">The dashboard will update automatically.</p>
+        </div>
+        <div class="freshness">
+          <span class="freshness-icon" aria-hidden="true"></span>
+          <span id="last-checked">Waiting for first check</span>
+        </div>
+      </section>
+
+      <section class="system-flow" aria-label="Execution system flow">
+        <div class="flow-node">
+          <span class="flow-icon flow-system" aria-hidden="true"></span>
+          <span>Trading System</span>
+        </div>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <div class="flow-node flow-node-primary">
+          <span class="flow-icon flow-monitor" aria-hidden="true">✓</span>
+          <span>Execution Monitor</span>
+        </div>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <div class="flow-node">
+          <span class="flow-icon flow-venue" aria-hidden="true"></span>
+          <span>Exchange Simulator</span>
+        </div>
+      </section>
+
+      <div class="dashboard-grid">
+        <section class="card order-card" aria-labelledby="order-heading">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">LIVE SEQUENCE</p>
+              <h2 id="order-heading">Order progress</h2>
+            </div>
+            <span class="phase-value" id="phase-value">Waiting</span>
+          </div>
+          <div class="progress-scroll">
+            <ol id="order-stage-grid" class="progress-track" aria-live="polite">
+              <li data-phase="checking_order"><span class="step-marker">1</span><span>Checking</span></li>
+              <li data-phase="sending_order"><span class="step-marker">2</span><span>Sending</span></li>
+              <li data-phase="waiting_for_fill"><span class="step-marker">3</span><span>Waiting</span></li>
+              <li data-phase="order_partly_filled"><span class="step-marker">4</span><span>Partial fill</span></li>
+              <li data-phase="order_fully_filled"><span class="step-marker">5</span><span>Filled</span></li>
+              <li data-phase="reconciled"><span class="step-marker">6</span><span>Reconciled</span></li>
+            </ol>
+          </div>
+          <p class="branch-message" id="branch-message" hidden></p>
+        </section>
+
+        <section class="card protection-card" aria-labelledby="checks-heading">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">GUARDRAILS</p>
+              <h2 id="checks-heading">Protection</h2>
+            </div>
+          </div>
+          <div id="safety-grid" class="health-list">
+            <div class="health-row" data-check="duplicate_protection">
+              <span class="health-icon" aria-hidden="true">✓</span><span class="health-label">Duplicate prevention</span><strong>PROTECTED</strong>
+            </div>
+            <div class="health-row" data-check="risk_limit_active">
+              <span class="health-icon" aria-hidden="true">✓</span><span class="health-label">Risk limits</span><strong>ACTIVE</strong>
+            </div>
+            <div class="health-row" data-check="connection_healthy">
+              <span class="health-icon" aria-hidden="true">✓</span><span class="health-label">Connection</span><strong>HEALTHY</strong>
+            </div>
+            <div class="health-row" data-check="emergency_stop_ready">
+              <span class="health-icon" aria-hidden="true">✓</span><span class="health-label">Emergency stop</span><strong>READY</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="card reconciliation-card" aria-labelledby="records-heading">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">VENUE COMPARISON</p>
+              <h2 id="records-heading">Reconciliation</h2>
+            </div>
+          </div>
+          <div id="reconciliation-grid" class="health-list reconciliation-list">
+            <div class="health-row" data-record="orders_match"><span class="record-icon" aria-hidden="true"></span><span class="health-label">Orders</span><strong>MATCHED</strong></div>
+            <div class="health-row" data-record="fills_match"><span class="record-icon" aria-hidden="true"></span><span class="health-label">Fills</span><strong>MATCHED</strong></div>
+            <div class="health-row" data-record="position_matches"><span class="record-icon" aria-hidden="true"></span><span class="health-label">Position</span><strong>MATCHED</strong></div>
+            <div class="health-row" data-record="balance_matches"><span class="record-icon" aria-hidden="true"></span><span class="health-label">Balance</span><strong>MATCHED</strong></div>
+          </div>
+        </section>
+
+        <section class="card event-card" aria-labelledby="event-heading">
+          <div class="card-heading">
+            <div>
+              <p class="section-kicker">MOST RECENT</p>
+              <h2 id="event-heading">Latest event</h2>
+            </div>
+          </div>
+          <div class="event-content">
+            <span class="event-icon" aria-hidden="true"></span>
+            <div>
+              <p id="latest-event" aria-live="polite">Connecting to the local monitor…</p>
+              <time id="latest-event-time">Waiting for event time</time>
+            </div>
+          </div>
+          <p class="read-only-note"><span aria-hidden="true">●</span> Live verified state · No trading controls</p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

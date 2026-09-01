@@ -1,0 +1,46 @@
+{
+  "baseline_failures_detected": {
+    "connection_not_recovered": true,
+    "duplicate_order": true,
+    "partial_fill_mismatch": true,
+    "state_lost_after_restart": true
+  },
+  "corrected_scenarios": {
+    "disconnect_recovery": {
+      "evidence": "Disconnect blocks execution; reconnect restores authoritative state.",
+      "passed": true
+    },
+    "duplicate_retry": {
+      "evidence": "One trade request produced one venue order.",
+      "passed": true
+    },
+    "partial_fill": {
+      "evidence": "Actual fills, position, and balance reconcile.",
+      "passed": true
+    },
+    "rejection_and_cancellation": {
+      "evidence": "Rejected and cancelled orders retain explicit terminal states.",
+      "passed": true
+    },
+    "restart_recovery": {
+      "evidence": "Journal and authoritative venue state survive a process restart.",
+      "passed": true
+    },
+    "risk_limit": {
+      "evidence": "Oversized trade requests are blocked before the venue.",
+      "passed": true
+    },
+    "stale_state_recovery": {
+      "evidence": "A venue-only fill is detected, then reconciled.",
+      "passed": true
+    }
+  },
+  "generated_at": "2026-09-01T14:41:54.937+00:00",
+  "limitations": [
+    "The venue is deterministic and contains no real account data.",
+    "This verifies execution reliability, not trading profitability.",
+    "No testnet or live venue is included in version one."
+  ],
+  "mode": "simulation",
+  "overall_result": "passed"
+}

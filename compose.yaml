@@ -1,0 +1,18 @@
+services:
+  execution-monitor:
+    build: .
+    ports:
+      - "127.0.0.1:8765:8765"
+    environment:
+      EXECUTION_MONITOR_ALLOW_CONTAINER_BIND: "1"
+    volumes:
+      - ./var:/app/var
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8765/healthz', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
